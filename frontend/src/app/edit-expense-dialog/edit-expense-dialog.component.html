@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Edit Expense</h2>
+<div >
+    <form [formGroup]="editExpenseForm" class="d-flex flex-column align-items-center px-5 py-2">
+        <mat-form-field>
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amount" type="number">
+          <mat-error *ngIf="editExpenseForm.get('title')?.hasError('required')">Amount is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description">
+            <mat-error *ngIf="editExpenseForm.get('budget')?.hasError('required')">Description is required</mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Select a Budget</mat-label>
+            <mat-select formControlName="budget">
+            <mat-option *ngFor="let item of allBudgets" [value]="item?._id">
+                {{ item?.title }}
+            </mat-option>
+            </mat-select>
+            <mat-error *ngIf="editExpenseForm.get('budget')?.invalid && editExpenseForm.get('budget')?.touched">
+            You must select a budget.
+            </mat-error>
+          </mat-form-field>
+        </form>
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button type="submit" (click)="onSubmit()">Add</button>
+  </mat-dialog-actions>
+

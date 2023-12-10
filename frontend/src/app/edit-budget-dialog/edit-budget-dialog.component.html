@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Edit Budget</h2>
+<div >
+    <form [formGroup]="editForm" class="d-flex flex-column align-items-center px-5 py-2">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+          <mat-error *ngIf="editForm.get('title')?.hasError('required')">Title is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Budget</mat-label>
+            <input matInput formControlName="budget" type="num">
+            <mat-error *ngIf="editForm.get('budget')?.hasError('required')">Budget is required</mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-label>Color</mat-label>
+            <input matInput formControlName="color">
+            
+            <mat-error *ngIf="editForm.get('color')?.hasError('required')">Color is required</mat-error>
+          </mat-form-field>
+        </form>
+</div>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button type="submit" (click)="onSubmit()">Save</button>
+  </mat-dialog-actions>
+

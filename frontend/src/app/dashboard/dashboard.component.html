@@ -1,0 +1,152 @@
+<div class="container">
+    <div class="d-flex justify-content-between pt-2">
+        <h1>Dashboard</h1>
+        <form [formGroup]="dashboardForm">
+            <mat-form-field>
+                <mat-select formControlName="budget">
+                    <mat-option *ngFor="let item of dashboardFilters" [value]="item?.value">
+                        {{ item?.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="d-flex pt-3 justify-content-around">
+        <mat-card>
+            <mat-card-header>
+                <h2>Total Budget</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="card-text pb-2">$ {{totalBudget}}</p>
+            </mat-card-content>
+            <mat-card-footer>
+                <p class="card-under-text px-2">This indicates the total budget you have</p>
+            </mat-card-footer>
+        </mat-card>
+        <mat-card>
+            <mat-card-header>
+                <h2>Total Expenses</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="card-text pb-2">$ {{totalExpenses}}</p>
+            </mat-card-content>
+            <mat-card-footer>
+                <p class="card-under-text px-2">This indicates the total expenses you made</p>
+            </mat-card-footer>
+        </mat-card>
+        <mat-card>
+            <mat-card-header>
+                <h2>Remaining Budget</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="card-text pb-2 d-flex align-items-center">$ {{totalBudget - totalExpenses}}
+                    <span *ngIf="totalBudget - totalExpenses > 30" class="icon positive ps-2">
+                        <!-- Green check for positive health -->
+                        <mat-icon class="positive-icon">check_circle</mat-icon>
+                    </span>
+                    <span *ngIf="totalBudget - totalExpenses < 0" class="icon negative ps-2">
+                        <!-- Red cancel or error for negative health -->
+                        <mat-icon class="negative-icon">cancel</mat-icon>
+                    </span>
+                    <span *ngIf="totalBudget - totalExpenses <= 30 && totalBudget - totalExpenses >= 0"
+                        class="icon warning ps-2">
+                        <!-- Yellow warning for caution -->
+                        <mat-icon class="warning-icon">warning</mat-icon>
+                    </span>
+                </p>
+            </mat-card-content>
+            <mat-card-footer>
+                <p class="card-under-text px-2">This indicates the remaining budget you have left</p>
+            </mat-card-footer>
+        </mat-card>
+
+        
+
+    </div>
+
+    <div class="d-flex justify-content-around pt-5">
+        <mat-card>
+            <mat-card-header>
+                <h2>Total Budget</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <app-all-budgets-chart [data]="budgetPieData"></app-all-budgets-chart>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-header>
+                <h2>Total Expenses</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <app-all-expenses-chart [data]="expensesPieData"></app-all-expenses-chart>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="d-flex justify-content-around pt-5">
+        <mat-card class="flex-grow-1">
+            <mat-card-content>
+                <mat-card-header>
+                    <h2>Expenses per Day</h2>
+                </mat-card-header>
+                <app-expense-line [data]="expensesLine"></app-expense-line>
+            </mat-card-content>
+        </mat-card>
+    
+        
+    </div>
+    <div class="d-flex justify-content-around pt-5">
+        <mat-card class="flex-grow-1">
+            <mat-card-content>
+                <mat-card-header>
+                    <h2>Budget vs Expense Comparison Bar Chart</h2>
+                </mat-card-header>
+                <app-budget-expense-bar-chart [data]="expensesPieData" [multiplier]="dashboardFilter"></app-budget-expense-bar-chart>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="d-flex justify-content-around pt-5">
+        <mat-card class="flex-grow-1">
+            <mat-card-header>
+                <h2>Recent Expenses</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <table mat-table #table [dataSource]="expenses" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef> Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'longDate' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef> Amount </th>
+                        <td mat-cell *matCellDef="let element"> $ {{element.amount}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef> Description </th>
+                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="budget">
+                        <th mat-header-cell *matHeaderCellDef> Budget </th>
+                        <td mat-cell *matCellDef="let element"> {{element.budget.title}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+            </mat-card-content>
+            <mat-card-actions class="d-flex justify-content-end">
+                <a mat-button [routerLink]="['/expenses']" class="d-flex flex-row-reverse justify-content-between">See
+                    all Expenses <mat-icon>arrow_right_alt</mat-icon></a>
+            </mat-card-actions>
+        </mat-card>
+
+       
+    </div>
+
+    <div class="d-flex justify-content-around pt-5">
+        
+    </div>
+</div>
