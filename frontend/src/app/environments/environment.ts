@@ -1,5 +1,5 @@
 export const environment = {
 
-    apiURL: 'http://157.245.8.140/api/'
+    apiURL: 'https://personal-budget-api-nzrf.onrender.com/api'
     
 }
