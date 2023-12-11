@@ -19,9 +19,8 @@ mongoose
 
 app.use(
   cors({
-    origin: ["https://personal-budget-final-project-nbad-itcs-5122-trishbandhekar97.vercel.app/", 
-    "https://personal-budget-final-project-nbad-git-12aa5e-trishbandhekar97.vercel.app/", 
-    "https://personal-budget-final-project-nbad-itcs-5122-9b762juez.vercel.app/"],
+    origin: ["https://personal-budget-final-project-nbad-itcs-5122-trishbandhekar97.vercel.app", 
+             "https://personal-budget-final-project-nbad-git-12aa5e-trishbandhekar97.vercel.app"],
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true,
   })
