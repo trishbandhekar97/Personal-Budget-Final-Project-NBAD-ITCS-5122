@@ -17,7 +17,6 @@ export class AppComponent implements OnInit{
     this.auth.isAuthenticated.subscribe(isAuth => {
       this.isLoggedIn = isAuth;
       if(this.isLoggedIn) this.router.navigate(['/dashboard'])
-      else this.router.navigate(['/login'])
     })
   }
 

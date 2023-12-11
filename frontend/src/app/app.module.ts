@@ -31,7 +31,10 @@ import { AllBudgetsChartComponent } from './all-budgets-chart/all-budgets-chart.
 import { AllExpensesChartComponent } from './all-expenses-chart/all-expenses-chart.component';
 import { ExpenseLineComponent } from './expense-line/expense-line.component';
 import { BudgetExpenseBarChartComponent } from './budget-expense-bar-chart/budget-expense-bar-chart.component';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { HomeComponent } from './home/home.component'
+import { MatExpansionModule } from '@angular/material/expansion'
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -51,6 +54,7 @@ import { BudgetExpenseBarChartComponent } from './budget-expense-bar-chart/budge
     AllExpensesChartComponent,
     ExpenseLineComponent,
     BudgetExpenseBarChartComponent,
+    HomeComponent,
     
   ],
   imports: [
@@ -68,6 +72,9 @@ import { BudgetExpenseBarChartComponent } from './budget-expense-bar-chart/budge
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
