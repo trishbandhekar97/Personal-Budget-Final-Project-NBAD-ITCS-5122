@@ -19,7 +19,7 @@ mongoose
 
 app.use(
   cors({
-    origin: ["https://steady-sunburst-6076b1.netlify.app"],
+    origin: ["https://steady-sunburst-6076b1.netlify.app", "localhost:4200"],
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true,
   })
