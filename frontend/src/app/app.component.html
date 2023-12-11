@@ -5,17 +5,17 @@
      
       <div>
         <div class="navbar-nav">
-          <a class="nav-link" aria-current="page" [routerLink]="['/login']" *ngIf="!isLoggedIn">Login</a>
-          <a class="nav-link" [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
-          <a class="nav-link" (click)="logout()" *ngIf="isLoggedIn">Logout</a>
+          <a class="nav-link" aria-current="page" [routerLink]="['/login']" *ngIf="!isLoggedIn" aria-label="Login to your account">Login</a>
+          <a class="nav-link" [routerLink]="['/register']" *ngIf="!isLoggedIn" aria-label="Register for a new account">Register</a>
+          <a class="nav-link" (click)="logout()" *ngIf="isLoggedIn" aria-label="Logout of your account">Logout</a>
         </div>
       </div>
     </div>
   </nav>
   <mat-sidenav-container class="sidenav-container" >
-    <mat-sidenav #sidenav mode="side" opened="true" *ngIf="isLoggedIn">
+    <mat-sidenav #sidenav mode="side" opened="true" *ngIf="isLoggedIn" role="navigation">
       <mat-nav-list>
-        <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active-link">Dashboard</a>
+        <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active-link" >Dashboard</a>
         <a mat-list-item [routerLink]="['/budgets']" routerLinkActive="active-link">Budgets</a>
         <a mat-list-item [routerLink]="['/expenses']" routerLinkActive="active-link">Expenses</a>
       </mat-nav-list>

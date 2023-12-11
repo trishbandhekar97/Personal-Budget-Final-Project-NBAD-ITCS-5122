@@ -38,7 +38,8 @@ const register = async (req,res) => {
 
         const { password, __v, ...data} = result.toJSON();
 
-        const token = jwt.sign({_id: _id, user: data }, SECRET_KEY, {expiresIn: '30m'});
+        const token = jwt.sign({_id: _id, user: data }, SECRET_KEY, {expiresIn: '1m'});
+        const refreshToken = jwt.sign({_id: _id, user: data }, SECRET_KEY, {expiresIn: '10m'});
 
         res.cookie("jwt",token,{
             httpOnly:true,
@@ -46,7 +47,8 @@ const register = async (req,res) => {
         });
 
         res.status(200).json({
-            message: "success"
+            message: "success",
+            refreshToken: refreshToken
         });
 
         
@@ -74,7 +76,9 @@ const login = async (req,res) => {
 
     const { password, __v, ...data} = user._doc;
 
-    const token=jwt.sign({_id:user._id, user: data}, SECRET_KEY, { expiresIn: '30m'});
+    const token=jwt.sign({_id:user._id, user: data}, SECRET_KEY, { expiresIn: '1m'});
+    const refreshToken = jwt.sign({_id: user._id, user: data }, SECRET_KEY, {expiresIn: '10m'});
+
     res.cookie("jwt",token,{
         httpOnly: true,
         maxAge:24*60*60*1000
@@ -82,7 +86,8 @@ const login = async (req,res) => {
 
     
     return res.status(200).json({
-        message: "success"
+        message: "success",
+        refreshToken: refreshToken
     })
 }
 
@@ -109,9 +114,40 @@ const currUser = async(req, res) => {
     );
 }
 
+const refreshToken = async (req,res) => {
+    const {refreshToken} = req.body;
+
+    try {
+        const { iat, exp, ...decoded} = jwt.verify(refreshToken, SECRET_KEY);
+
+        const user = decoded;
+        const token=jwt.sign({_id:user._id},SECRET_KEY, { expiresIn: '1m'});
+        const newRefreshToken = jwt.sign({ _id: user._id}, SECRET_KEY, { expiresIn: '10m'})
+
+        res.cookie("jwt",token,{
+            httpOnly:true,
+            maxAge: 24*60*60*1000
+        });
+
+        res.status(200).json({
+            message: "success",
+            refreshToken: newRefreshToken
+        });
+    } catch(err) {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    }
+
+    
+}
+
+
 module.exports = {
     register,
     login,
     logout,
-    currUser
+    currUser,
+    refreshToken
 }

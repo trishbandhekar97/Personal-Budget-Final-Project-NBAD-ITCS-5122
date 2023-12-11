@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const { register, login, logout, currUser } = require('../controller/userController');
+const { register, login, logout, currUser, refreshToken } = require('../controller/userController');
 const User = require('../models/User');
 const jwt=require('jsonwebtoken');
 const { getBudgets, addBudget, deleteBudget, modifyBudget } = require('../controller/budgetController');
@@ -55,6 +55,9 @@ router.route('/expense').get(getExpense)
 router.get('/jwt-check', jwtCheck, currUser);
 
 router.get('/dashboard', jwtCheck, getDashboard);
+
+
+router.post('/refresh', refreshToken);
 
 
 

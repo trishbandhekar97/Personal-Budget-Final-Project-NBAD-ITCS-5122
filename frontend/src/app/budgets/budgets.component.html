@@ -15,32 +15,32 @@
       
         <!-- Position Column -->
         <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          <th mat-header-cell *matHeaderCellDef role="columnheader"> No. </th>
+          <td mat-cell *matCellDef="let element" role="gridcell"> {{element.position}} </td>
         </ng-container>
       
         <!-- Name Column -->
         <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef> Title </th>
-          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          <th mat-header-cell *matHeaderCellDef role="columnheader"> Title </th>
+          <td mat-cell *matCellDef="let element" role="gridcell"> {{element.title}} </td>
         </ng-container>
       
         <!-- Weight Column -->
         <ng-container matColumnDef="budget">
-          <th mat-header-cell *matHeaderCellDef> Budget </th>
-          <td mat-cell *matCellDef="let element"> $ {{element.budget}} </td>
+          <th mat-header-cell *matHeaderCellDef role="columnheader"> Budget </th>
+          <td mat-cell *matCellDef="let element" role="gridcell"> $ {{element.budget}} </td>
         </ng-container>
       
         <!-- Symbol Column -->
         <ng-container matColumnDef="color">
-          <th mat-header-cell *matHeaderCellDef> Color </th>
+          <th mat-header-cell *matHeaderCellDef role="columnheader"> Color </th>
           <!-- <td mat-cell *matCellDef="let element""> {{element.color}} </td> -->
-          <td mat-cell *matCellDef="let element"> <span class="small-circle d-block" [style.backgroundColor]="element.color"></span></td>
+          <td mat-cell *matCellDef="let element" role="gridcell"> <span class="small-circle d-block" [style.backgroundColor]="element.color"></span></td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
-            <th mat-header-cell *matHeaderCellDef> Edit </th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef role="columnheader"> Edit </th>
+            <td mat-cell *matCellDef="let element" role="gridcell">
                 <button mat-icon-button (click)="onEditClick(element)">
                 <mat-icon>edit</mat-icon>
               </button>
@@ -48,8 +48,8 @@
           </ng-container>
 
           <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef> Delete </th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef role="columnheader"> Delete </th>
+            <td mat-cell *matCellDef="let element" role="gridcell">
                 <button mat-icon-button (click)="delete(element)">
                 <mat-icon>delete</mat-icon>
               </button>

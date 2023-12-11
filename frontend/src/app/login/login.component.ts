@@ -21,9 +21,9 @@ export class LoginComponent {
 
   login() {
     this.auth.login(this.email,this.password).subscribe(response => {
+      localStorage.setItem("refreshToken", response.refreshToken)
       Emitters.isLoggedInEmitter.emit(true);
       this.auth.setAuthenticated(true);
-      this.router.navigate(['dashboard'])
       
     }, error => {
       Emitters.isLoggedInEmitter.emit(false);

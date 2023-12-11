@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, withRouterConfig } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthService {
   
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  intervalId: any;
 
   constructor(private http: HttpClient, private router: Router) { 
     this.checkAuth();
@@ -28,6 +30,10 @@ export class AuthService {
 
   logout() {
     return this.http.post<any>(environment.apiURL + 'logout', {}, {withCredentials: true});
+  }
+
+  refresh(refreshToken: any) {
+    return this.http.post<any>(environment.apiURL + 'refresh', { refreshToken:refreshToken });
   }
 
   checkAuth() {

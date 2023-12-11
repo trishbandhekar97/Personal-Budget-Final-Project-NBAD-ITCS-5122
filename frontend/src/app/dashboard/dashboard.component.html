@@ -70,7 +70,7 @@
                 <h2>Total Budget</h2>
             </mat-card-header>
             <mat-card-content>
-                <app-all-budgets-chart [data]="budgetPieData"></app-all-budgets-chart>
+                <app-all-budgets-chart [data]="budgetPieData" aria-label="Chart showing monthly Budgets"></app-all-budgets-chart>
             </mat-card-content>
         </mat-card>
         <mat-card>
@@ -78,7 +78,7 @@
                 <h2>Total Expenses</h2>
             </mat-card-header>
             <mat-card-content>
-                <app-all-expenses-chart [data]="expensesPieData"></app-all-expenses-chart>
+                <app-all-expenses-chart [data]="expensesPieData" aria-label="Chart showing monthly expenses"></app-all-expenses-chart>
             </mat-card-content>
         </mat-card>
     </div>
@@ -88,7 +88,7 @@
                 <mat-card-header>
                     <h2>Expenses per Day</h2>
                 </mat-card-header>
-                <app-expense-line [data]="expensesLine"></app-expense-line>
+                <app-expense-line [data]="expensesLine" aria-label="Chart showing daily expenses"></app-expense-line>
             </mat-card-content>
         </mat-card>
     
@@ -100,7 +100,7 @@
                 <mat-card-header>
                     <h2>Budget vs Expense Comparison Bar Chart</h2>
                 </mat-card-header>
-                <app-budget-expense-bar-chart [data]="expensesPieData" [multiplier]="dashboardFilter"></app-budget-expense-bar-chart>
+                <app-budget-expense-bar-chart [data]="expensesPieData" [multiplier]="dashboardFilter" aria-label="Bar chart showing monthly budget vs expenses"></app-budget-expense-bar-chart>
             </mat-card-content>
         </mat-card>
     </div>
