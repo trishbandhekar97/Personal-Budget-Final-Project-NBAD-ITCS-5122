@@ -50,6 +50,8 @@ export class AppComponent implements OnInit, OnDestroy{
     }).then((result) => {
       if (result.isConfirmed) {
         this.refreshToken();
+      } else if(result.isDenied) {
+        this.logout();
       }
     });
   }
