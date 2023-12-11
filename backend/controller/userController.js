@@ -98,9 +98,12 @@ const login = async (req,res) => {
 
 const logout = async (req,res) => {
 
-    res.cookie("jwt", "", {
-        maxAge:0
-    })
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+        expires: new Date(0) 
+      });
 
     return res.status(200).json({
         message: "success"

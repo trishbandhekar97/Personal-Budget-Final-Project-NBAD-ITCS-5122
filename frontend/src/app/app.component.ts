@@ -21,9 +21,8 @@ export class AppComponent implements OnInit, OnDestroy{
       if(this.isLoggedIn) {
         this.router.navigate(['/dashboard'])
         this.startTokenRefreshInterval();
-      } else if (this.intervalId) {
-        clearInterval(this.intervalId);
-        this.intervalId = null;
+      } else {
+        clearInterval(this.intervalId)
       }
     })
   }
