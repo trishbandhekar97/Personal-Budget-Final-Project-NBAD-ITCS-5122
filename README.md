@@ -8,11 +8,11 @@ https://steady-sunburst-6076b1.netlify.app
 
 Backend - Render 
 
-[Link]([https://pages.github.com/](https://render.com/))
+[Link](https://render.com/)
 
 Frontend - Netlify 
 
-[Link]([https://www.netlify.com/])
+[Link](https://www.netlify.com/)
 
 ## Sample Account
 email: trish@gmail.com
