@@ -20,7 +20,9 @@ export class AppComponent implements OnInit, OnDestroy{
     this.auth.isAuthenticated.subscribe(isAuth => {
       this.isLoggedIn = isAuth;
       if(this.isLoggedIn) {
-        this.router.navigate(['/dashboard'])
+        if (this.router.url !== '/dashboard') {
+          this.router.navigate(['/dashboard']);
+        }
         this.startTokenRefreshInterval();
       } else {
         clearInterval(this.intervalId)
@@ -29,14 +31,12 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    if (this.intervalId) {
       clearInterval(this.intervalId);
-    }
   }
 
 
   private startTokenRefreshInterval() {
-    console.log("Working")
+    clearInterval(this.intervalId); 
     this.intervalId = setInterval(() => this.showTokenRefreshPopup(), 40000);
   }
 
