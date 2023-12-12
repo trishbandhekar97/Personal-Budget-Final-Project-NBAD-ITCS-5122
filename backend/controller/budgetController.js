@@ -1,4 +1,5 @@
 const Budget = require('../models/Budget');
+const Expense = require('../models/Expense');
 
 
 const getBudgets = async (req,res) => {
@@ -28,6 +29,33 @@ const addBudget = async (req,res) => {
     };
 
     try {
+
+        const existingBudgetWithTitle = await Budget.findOne({
+            createdBy: currUser.user._id,
+            title: budgetData.title
+        });
+    
+        const existingBudgetWithColor = await Budget.findOne({
+            createdBy: currUser.user._id,
+            color: budgetData.color
+        });
+    
+        if (existingBudgetWithTitle) {
+            // If a budget with the same title exists, send an error response
+            return res.status(400).json({
+                status: "error",
+                message: "A budget with the same title already exists."
+            });
+        }
+    
+        if (existingBudgetWithColor) {
+            // If a budget with the same color exists, send an error response
+            return res.status(400).json({
+                status: "error",
+                message: "A budget with the same color already exists."
+            });
+        }
+
         const newBudget = new Budget(budgetData);
         const savedBudget = await newBudget.save();
         res.status(201).json({
@@ -93,6 +121,8 @@ const deleteBudget = async(req,res) => {
 
     try {
         await Budget.findByIdAndDelete(id);
+
+        await Expense.deleteMany({budget: id});
 
         return res.status(201).json({
             status: "success",

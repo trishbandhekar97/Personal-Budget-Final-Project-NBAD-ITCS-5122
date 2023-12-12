@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
   isLoggedIn: boolean = false; 
   private intervalId: any | null = null;
+  
 
   constructor(private router: Router, private auth: AuthService) {
     this.auth.isAuthenticated.subscribe(isAuth => {
